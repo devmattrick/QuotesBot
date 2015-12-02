@@ -5,9 +5,9 @@ import lombok.Getter;
 // @author Luke Anderson | stuntguy3000
 public class Quote {
     @Getter
-    private Person person;
+    private final Person person;
     @Getter
-    private String message;
+    private final String message;
 
     public Quote(Person person, String message) {
         this.person = person;

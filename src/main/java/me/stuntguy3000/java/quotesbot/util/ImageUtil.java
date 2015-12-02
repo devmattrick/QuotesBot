@@ -34,7 +34,7 @@ public class ImageUtil {
     public static File addText(File baseImage, String text, int lineWidth, int x, int y) {
         File output = new File(QuotesBot.getInstance().getOutputFolder() + File.separator + new RandomString(5).nextString() + ".png");
         try {
-            Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, 80);
+            Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, 20);
             BufferedImage image = ImageIO.read(baseImage);
 
             Graphics g = image.getGraphics();

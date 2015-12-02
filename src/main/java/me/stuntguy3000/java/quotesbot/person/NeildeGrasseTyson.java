@@ -1,5 +1,7 @@
 package me.stuntguy3000.java.quotesbot.person;
 
+import me.stuntguy3000.java.quotesbot.QuotesBot;
+import me.stuntguy3000.java.quotesbot.handler.CacheHandler;
 import me.stuntguy3000.java.quotesbot.handler.LogHandler;
 import me.stuntguy3000.java.quotesbot.hook.TelegramHook;
 import me.stuntguy3000.java.quotesbot.object.Person;
@@ -19,14 +21,21 @@ public class NeildeGrasseTyson extends Person {
 
     @Override
     public void generateImage(String text, Chat chat) {
+        CacheHandler cacheHandler = QuotesBot.getInstance().getCacheHandler();
+        File quote = cacheHandler.getCached(text, this);
+
+        if (quote == null) {
+            quote = ImageUtil.addText(baseImage, text, 270, 50, 70);
+            cacheHandler.addQuote(text, this, quote);
+        }
+
         chat.sendMessage(SendableChatAction.builder().chatAction(ChatAction.UPLOADING_PHOTO).build(), TelegramHook.getBot());
-        File quote = ImageUtil.addText(baseImage, text, 900, 100, 240);
         InputFile inputFile = new InputFile(quote);
         chat.sendMessage(SendablePhotoMessage.builder()
-            .photo(inputFile)
-                .caption("test")
-            .build()
-        , TelegramHook.getBot());
+                .photo(inputFile)
+                .build()
+                , TelegramHook.getBot());
+
         LogHandler.log("Sent image");
     }
 

@@ -16,13 +16,15 @@ public class QuotesBot {
     @Getter
     public static QuotesBot instance;
     @Getter
-    private ConfigHandler configHandler;
+    private ConfigHandler configHandler = new ConfigHandler();
     @Getter
     private CommandHandler commandHandler = new CommandHandler();
     @Getter
-    private File outputFolder;
+    private PersonHandler personHandler = new PersonHandler();
     @Getter
-    private PersonHandler personHandler;
+    private CacheHandler cacheHandler = new CacheHandler();
+    @Getter
+    private File outputFolder;
 
     public static void main(String[] args) {
         new QuotesBot().main();
@@ -30,8 +32,6 @@ public class QuotesBot {
 
     public void main() {
         instance = this;
-        configHandler = new ConfigHandler();
-        personHandler = new PersonHandler();
 
         File build = new File("build");
 

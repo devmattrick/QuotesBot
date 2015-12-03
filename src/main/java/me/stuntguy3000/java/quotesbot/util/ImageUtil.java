@@ -69,7 +69,7 @@ public class ImageUtil {
     public static File addText(Image baseImage, String text, int fontSize, int lineWidth, int maxRows, int x, int y) {
         File output = new File(QuotesBot.getInstance().getOutputFolder() + File.separator + new RandomString(5).nextString() + ".png");
         try {
-            Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
+            Font font = new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
             BufferedImage image = imageToBufferedImage(baseImage);
 
             Graphics g = image.getGraphics();
@@ -88,7 +88,7 @@ public class ImageUtil {
     public static File borderImage(Image baseImage, int fontSize, int lineSize, int maxRows, int x, int y) {
         File output = new File(QuotesBot.getInstance().getOutputFolder() + File.separator + new RandomString(5).nextString() + ".png");
         try {
-            Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
+            Font font = new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
             BufferedImage image = imageToBufferedImage(baseImage);
             Graphics g = image.getGraphics();
 

@@ -15,7 +15,8 @@ import java.io.File;
 
 // @author Luke Anderson | stuntguy3000
 public enum Person {
-    Neil("Neil deGrasse Tyson", 20, 230, 6, 20, 30);
+    Neil("Neil deGrasse Tyson", 20, 230, 6, 20, 30),
+    Obama("President Barack Obama", 16, 150, 7, 20, 30);
 
     @Getter
     private String fullName;

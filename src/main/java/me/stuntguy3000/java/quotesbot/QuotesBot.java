@@ -6,6 +6,7 @@ import me.stuntguy3000.java.quotesbot.hook.TelegramHook;
 import org.apache.commons.io.FileUtils;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -81,6 +82,16 @@ public class QuotesBot {
                 case "botfather": {
                     LogHandler.log(getCommandHandler().getBotFatherString());
                     continue;
+                }
+                case "fonts": {
+                    String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    for (String font : fonts) {
+                        stringBuilder.append(font).append(", ");
+                    }
+
+                    System.out.println(stringBuilder.toString());
                 }
                 case "quit":
                 case "stop":

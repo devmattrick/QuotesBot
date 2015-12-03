@@ -18,7 +18,10 @@ import java.io.IOException;
 // @author Luke Anderson | stuntguy3000
 public enum Person {
     Neil("Neil deGrasse Tyson", 20, 230, 6, 20, 30),
-    Obama("President Barack Obama", 16, 150, 7, 20, 30);
+    Obama("President Barack Obama", 16, 150, 7, 20, 30),
+    Hitler("Adolf Hitler", 22, 150, 7, 160, 25),
+    Mandela("Nelson Mandela", 20, 270, 4, 160, 70),
+    Cena("John Cena", 20, 200, 5, 170, 60);
 
     @Getter
     private String fullName;

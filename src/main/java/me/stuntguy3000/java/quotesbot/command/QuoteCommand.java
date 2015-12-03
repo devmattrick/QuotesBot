@@ -15,7 +15,7 @@ public class QuoteCommand extends Command {
         String[] args = event.getArgs();
 
         if (args.length < 2) {
-
+            respond(event.getChat(), "Syntax: /quote <person> <text>");
         } else {
             String personName = args[0];
             StringBuilder quote = new StringBuilder();
@@ -28,7 +28,7 @@ public class QuoteCommand extends Command {
             Person person = getInstance().getPersonHandler().getPerson(personName);
 
             if (person == null) {
-
+                respond(event.getChat(), "Invalid person specified!");
             } else {
                 person.generateImage(quote.toString(), event.getMessage().getChat());
             }

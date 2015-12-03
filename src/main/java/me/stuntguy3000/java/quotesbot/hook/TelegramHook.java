@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.stuntguy3000.java.quotesbot.QuotesBot;
 import me.stuntguy3000.java.quotesbot.handler.LogHandler;
 import me.stuntguy3000.java.quotesbot.object.Command;
-import me.stuntguy3000.java.quotesbot.object.Person;
 import me.stuntguy3000.java.quotesbot.util.ClassGetter;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.event.Listener;
@@ -30,21 +29,6 @@ public class TelegramHook implements Listener {
         instance.sendToAdmins("Bot has connected, running build #" + QuotesBot.BUILD);
 
         this.initializeCommands();
-        this.initializePeople();
-    }
-
-    private void initializePeople() {
-        List<Class<?>> allPeople = ClassGetter.getClassesForPackage("me.stuntguy3000.java.quotesbot.person.");
-        allPeople.stream().filter(Person.class::isAssignableFrom).forEach(clazz -> {
-            try {
-                Person person = (Person) clazz.newInstance();
-                QuotesBot.getInstance().getPersonHandler().registerPerson(person);
-                LogHandler.log("Registered person " + person.getShortID());
-            } catch (InstantiationException | IllegalAccessException e) {
-                LogHandler.log(clazz.getSimpleName() + " failed to instantiate:");
-                e.printStackTrace();
-            }
-        });
     }
 
     private void initializeCommands() {

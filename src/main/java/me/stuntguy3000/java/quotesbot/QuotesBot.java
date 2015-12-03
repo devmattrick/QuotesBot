@@ -55,14 +55,12 @@ public class QuotesBot {
         outputFolder = new File("output");
 
         if (outputFolder.exists()) {
-            if (!outputFolder.delete()) {
-                LogHandler.log("Warning: Unable to delete output folder.");
-            } else {
-                LogHandler.log("Removed output folder.");
+            for (File file : outputFolder.listFiles()) {
+                file.delete();
             }
+        } else {
+            outputFolder.mkdirs();
         }
-
-        outputFolder.mkdirs();
 
         LogHandler.log("======================================");
         LogHandler.log(" QuotesBot build " + BUILD + " by @stuntguy3000");

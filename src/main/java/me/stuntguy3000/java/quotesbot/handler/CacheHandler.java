@@ -18,7 +18,7 @@ public class CacheHandler {
     public File getCached(String message, Person person) {
         for (Map.Entry<Quote, String> quote : cachedQuotes.entrySet()) {
             if (quote.getKey().getMessage().equals(message) &&
-                    quote.getKey().getPerson().getShortID().equals(person.getShortID())) {
+                    quote.getKey().getPerson().name().equals(person.name())) {
                 return new File(quote.getValue());
             }
         }

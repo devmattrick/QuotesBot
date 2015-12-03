@@ -11,7 +11,9 @@ import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableChatAction;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
 
+import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 
 // @author Luke Anderson | stuntguy3000
 public enum Person {
@@ -45,8 +47,13 @@ public enum Person {
         File quote = cacheHandler.getCached(message, this);
 
         if (quote == null) {
-            quote = ImageUtil.addText(new File("images/" + this.name().toLowerCase() + ".jpg"),
-                    message, fontSize, lineSize, maxRows, x, y);
+            try {
+                quote = ImageUtil.addText(ImageIO.read(getClass().getResource("/" + this.name().toLowerCase() + ".jpg")),
+                        message, fontSize, lineSize, maxRows, x, y);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
             cacheHandler.addQuote(message, this, quote);
         }
 
@@ -59,8 +66,14 @@ public enum Person {
     }
 
     public void sendBorderImage(Chat chat) {
-        File quote = ImageUtil.borderImage(new File("images/" + this.name().toLowerCase() + ".jpg"),
-                fontSize, lineSize, maxRows, x, y);
+        File quote = null;
+        try {
+            quote = ImageUtil.borderImage(ImageIO.read(getClass().getResource("/" + this.name().toLowerCase() + ".jpg")),
+                    fontSize, lineSize, maxRows, x, y);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
         chat.sendMessage(SendableChatAction.builder().chatAction(ChatAction.UPLOADING_PHOTO).build(), TelegramHook.getBot());
         InputFile inputFile = new InputFile(quote);

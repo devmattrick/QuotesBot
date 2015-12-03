@@ -37,7 +37,7 @@
                 <filtering>true</filtering>
                 <directory>src/main/resources/</directory>
                 <includes>
-                    <include>*.json</include>
+                    <include>*.jpg</include>
                 </includes>
             </resource>
         </resources>

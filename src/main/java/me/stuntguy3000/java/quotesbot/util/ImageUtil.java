@@ -66,11 +66,12 @@ public class ImageUtil {
         }
     }
 
-    public static File addText(File baseImage, String text, int fontSize, int lineWidth, int maxRows, int x, int y) {
+    public static File addText(Image baseImage, String text, int fontSize, int lineWidth, int maxRows, int x, int y) {
         File output = new File(QuotesBot.getInstance().getOutputFolder() + File.separator + new RandomString(5).nextString() + ".png");
         try {
             Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
-            BufferedImage image = ImageIO.read(baseImage);
+            BufferedImage image = imageToBufferedImage(baseImage);
+
             Graphics g = image.getGraphics();
 
             g.setFont(font);
@@ -84,11 +85,11 @@ public class ImageUtil {
         return output;
     }
 
-    public static File borderImage(File baseImage, int fontSize, int lineSize, int maxRows, int x, int y) {
+    public static File borderImage(Image baseImage, int fontSize, int lineSize, int maxRows, int x, int y) {
         File output = new File(QuotesBot.getInstance().getOutputFolder() + File.separator + new RandomString(5).nextString() + ".png");
         try {
             Font font = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT, fontSize);
-            BufferedImage image = ImageIO.read(baseImage);
+            BufferedImage image = imageToBufferedImage(baseImage);
             Graphics g = image.getGraphics();
 
             g.setColor(Color.RED);
@@ -104,6 +105,15 @@ public class ImageUtil {
             e.printStackTrace();
         }
         return output;
+    }
+
+    public static BufferedImage imageToBufferedImage(Image im) {
+        BufferedImage bi = new BufferedImage
+                (im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics bg = bi.getGraphics();
+        bg.drawImage(im, 0, 0, null);
+        bg.dispose();
+        return bi;
     }
 
     /*public static File addText(File baseImage, String message, int fontSize, int lineSize, int x, int y) {

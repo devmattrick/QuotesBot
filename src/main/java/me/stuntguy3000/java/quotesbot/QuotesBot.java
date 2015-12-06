@@ -17,18 +17,20 @@ public class QuotesBot {
     @Getter
     public static QuotesBot instance;
     @Getter
-    private ConfigHandler configHandler = new ConfigHandler();
+    private CacheHandler cacheHandler = new CacheHandler();
     @Getter
     private CommandHandler commandHandler = new CommandHandler();
     @Getter
-    private PersonHandler personHandler = new PersonHandler();
-    @Getter
-    private CacheHandler cacheHandler = new CacheHandler();
+    private ConfigHandler configHandler = new ConfigHandler();
     @Getter
     private File outputFolder;
+    @Getter
+    private PersonHandler personHandler = new PersonHandler();
+    private Thread updaterThread;
 
-    public static void main(String[] args) {
-        new QuotesBot().main();
+    private void connectTelegram() {
+        LogHandler.log("Connecting to Telegram...");
+        new TelegramHook(configHandler.getBotSettings().getTelegramKey(), this);
     }
 
     public void main() {
@@ -71,7 +73,9 @@ public class QuotesBot {
 
         if (this.getConfigHandler().getBotSettings().getAutoUpdater()) {
             LogHandler.log("Starting auto updater...");
-            new Thread(new UpdateHandler(this)).start();
+            Thread updater = new Thread(new UpdateHandler(this, "Telegames"));
+            updater.start();
+            updaterThread = updater;
         } else {
             LogHandler.log("** Auto Updater is set to false **");
         }
@@ -102,15 +106,18 @@ public class QuotesBot {
         }
     }
 
-    private void connectTelegram() {
-        LogHandler.log("Connecting to Telegram...");
-        new TelegramHook(configHandler.getBotSettings().getTelegramKey(), this);
+    public static void main(String[] args) {
+        new QuotesBot().main();
     }
 
     public void sendToAdmins(String message) {
         for (int admin : configHandler.getBotSettings().getTelegramAdmins()) {
             TelegramBot.getChat(admin).sendMessage(message, TelegramHook.getBot());
         }
+    }
+
+    public void stopUpdater() {
+        updaterThread.interrupt();
     }
 }
     

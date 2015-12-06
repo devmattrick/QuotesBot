@@ -73,7 +73,7 @@ public class QuotesBot {
 
         if (this.getConfigHandler().getBotSettings().getAutoUpdater()) {
             LogHandler.log("Starting auto updater...");
-            Thread updater = new Thread(new UpdateHandler(this, "Telegames"));
+            Thread updater = new Thread(new UpdateHandler(this, "QuotesBot"));
             updater.start();
             updaterThread = updater;
         } else {

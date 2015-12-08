@@ -13,6 +13,7 @@ public class MazenCommand extends Command {
 
     public void processCommand(CommandMessageReceivedEvent event) {
         QuotesBot.getInstance().toggleMazenMode();
-        event.getChat().sendMessage("Mazen mode: " + QuotesBot.getInstance().isMazenMode(), TelegramHook.getBot());
+        //event.getChat().sendMessage("Mazen mode: " + QuotesBot.getInstance().isMazenMode(), TelegramHook.getBot());
+        event.getChat().sendMessage("Mazen mode cannot be disabled.", TelegramHook.getBot());
     }
 }

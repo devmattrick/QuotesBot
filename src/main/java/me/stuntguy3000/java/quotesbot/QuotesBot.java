@@ -23,7 +23,7 @@ public class QuotesBot {
     @Getter
     private ConfigHandler configHandler = new ConfigHandler();
     @Getter
-    private boolean mazenMode;
+    private boolean mazenMode = true;
     @Getter
     private File outputFolder;
     @Getter

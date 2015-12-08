@@ -12,6 +12,7 @@ import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceived
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
 import java.util.List;
+import java.util.Random;
 
 // @author Luke Anderson | stuntguy3000
 public class TelegramHook implements Listener {
@@ -55,7 +56,9 @@ public class TelegramHook implements Listener {
 
     @Override
     public void onTextMessageReceived(TextMessageReceivedEvent event) {
-        if (event.getMessage().getSender().getId() == 91845503 && getInstance().isMazenMode()) {
+        Random random = new Random();
+        int number = random.nextInt(30);
+        if (event.getMessage().getSender().getId() == 91845503 && getInstance().isMazenMode() && number > 28) {
             Person person = getInstance().getPersonHandler().getPerson("mazen");
             person.generateImage(event.getContent().getContent(), event.getMessage().getChat());
         }

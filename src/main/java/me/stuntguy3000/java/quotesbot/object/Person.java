@@ -24,7 +24,9 @@ public enum Person {
     Cena("John Cena", 20, 200, 5, 170, 60),
     Trump("Donald Trump", 20, 290, 4, 190, 45),
     Mazen("Mazen Kotb", 20, 200, 8, 33, 36),
-    Abbott("Tony Abbott", 20, 200, 5, 50, 50);
+    Abbott("Tony Abbott", 20, 200, 5, 50, 50),
+    BigRed("Big Red (Chanty Binx)", 20, 144, 5, 5, 7),
+    Jaden("Jaden Smith", 20, 130, 4, 140, 19);
 
     @Getter
     private String fullName;

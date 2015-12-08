@@ -23,9 +23,12 @@ public class QuotesBot {
     @Getter
     private ConfigHandler configHandler = new ConfigHandler();
     @Getter
+    private boolean mazenMode;
+    @Getter
     private File outputFolder;
     @Getter
     private PersonHandler personHandler = new PersonHandler();
+    @Getter
     private Thread updaterThread;
 
     private void connectTelegram() {
@@ -118,6 +121,10 @@ public class QuotesBot {
 
     public void stopUpdater() {
         updaterThread.interrupt();
+    }
+
+    public void toggleMazenMode() {
+        mazenMode = !mazenMode;
     }
 }
     

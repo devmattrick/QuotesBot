@@ -15,14 +15,13 @@ public class CommandHandler {
         commands = new HashMap<>();
     }
 
-    public void registerCommand(Command cmd) {
-        commands.put(cmd.getName().toLowerCase(), cmd);
-    }
-
-    public void executeCommand(String s, CommandMessageReceivedEvent event) {
+    public boolean executeCommand(String s, CommandMessageReceivedEvent event) {
         Command cmd = commands.get(s.toLowerCase());
-        if (cmd == null) return;
+        if (cmd == null) {
+            return false;
+        }
         cmd.processCommand(event);
+        return true;
     }
 
     public String getBotFatherString() {
@@ -34,5 +33,9 @@ public class CommandHandler {
         }
 
         return sb.toString();
+    }
+
+    public void registerCommand(Command cmd) {
+        commands.put(cmd.getName().toLowerCase(), cmd);
     }
 }

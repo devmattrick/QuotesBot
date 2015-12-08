@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.stuntguy3000.java.quotesbot.QuotesBot;
 import me.stuntguy3000.java.quotesbot.handler.LogHandler;
 import me.stuntguy3000.java.quotesbot.object.Command;
+import me.stuntguy3000.java.quotesbot.object.Person;
 import me.stuntguy3000.java.quotesbot.util.ClassGetter;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.event.Listener;
@@ -48,7 +49,12 @@ public class TelegramHook implements Listener {
     public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
         String command = event.getCommand();
 
-        instance.getCommandHandler().executeCommand(command, event);
+        if (!instance.getCommandHandler().executeCommand(command, event)) {
+            if (event.getMessage().getSender().getId() == 91845503 && getInstance().isMazenMode()) {
+                Person person = getInstance().getPersonHandler().getPerson("mazen");
+                person.generateImage(event.getContent().getContent(), event.getMessage().getChat());
+            }
+        }
     }
 }
     

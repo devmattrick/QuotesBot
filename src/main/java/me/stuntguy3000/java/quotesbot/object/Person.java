@@ -22,7 +22,8 @@ public enum Person {
     Hitler("Adolf Hitler", 22, 150, 4, 160, 95),
     Mandela("Nelson Mandela", 20, 270, 4, 160, 70),
     Cena("John Cena", 20, 200, 5, 170, 60),
-    Trump("Donald Trump", 20, 290, 4, 190, 45);
+    Trump("Donald Trump", 20, 290, 4, 190, 45),
+    Mazen("Mazen Kotb", 20, 200, 5, 33, 36);
 
     @Getter
     private String fullName;
